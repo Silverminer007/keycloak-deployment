@@ -144,7 +144,6 @@ jobs:
       - name: Show Deployment Details
         run: |
           kubectl get pods -n keycloak
-          kubectl describe pod -n keycloak -l app=keycloak
           kubectl get services -n keycloak
           kubectl get deployments -n keycloak
           kubectl get ingress -n keycloak
