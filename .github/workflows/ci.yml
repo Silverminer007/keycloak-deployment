@@ -110,6 +110,7 @@ jobs:
       - name: Update keycloak image:tag
         run: |
           sed -i 's|image: ghcr.io/silverminer007/keycloak:latest|image: ${{env.IMAGE}}:${{env.VERSION}}|' keycloak-deployment.yaml
+          cat keycloak-deployment.yaml
 
       - name: 🚀 Deploy to Kubernetes
         run: |
@@ -130,3 +131,14 @@ jobs:
           
           echo -n "Updating Keycloak Ingress ..."
           kubectl apply -f keycloak-ingress.yaml -n keycloak
+          
+          echo -n "Restarting Keycloak deployment ..."
+          kubectl rollout restart deployments/keycloak -n keycloak
+
+      - name: Show Deployment Details
+        run: |
+          kubectl get pods -n keycloak
+          kubectl describe pod -n keycloak -l app=keycloak
+          kubectl get services -n keycloak
+          kubectl get deployments -n keycloak
+          kubectl get ingress -n keycloak
