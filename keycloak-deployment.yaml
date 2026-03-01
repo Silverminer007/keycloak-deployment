@@ -19,7 +19,7 @@ spec:
       containers:
         - name: keycloak
           image: ghcr.io/silverminer007/keycloak:latest
-          command: ['/opt/keycloak/bin/kc.sh', 'start-dev']
+          command: ['/opt/keycloak/bin/kc.sh', 'start']
           ports:
             - containerPort: 8080
               name: http
@@ -45,7 +45,11 @@ spec:
             #  value: "keycloak.chronos-live.de"
             #- name: KC_HOSTNAME_STRICT
             #  value: "false"
+            #- name: KC_HOSTNAME_BACKCHANNEL_DYNAMIC
+            #  value: true
             - name: KC_ENABLE_HTTP
               value: "true"
             - name: KC_PROXY_HEADERS
               value: "xforwarded"
+            #- name: KC_PROXY_TRUSTED_ADDRESSES
+            #  value: 10.42.0.0/16
