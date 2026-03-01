@@ -107,6 +107,10 @@ jobs:
           echo "🔍 Testing Kubernetes connection..."
           kubectl get pods -n keycloak
 
+      - name: Update keycloak image:tag
+        run: |
+          sed -i 's|image: ghcr.io/silverminer007/keycloak:latest|image: ${{env.IMAGE}}:${{env.VERSION}}|' keycloak-deployment.yaml
+
       - name: 🚀 Deploy to Kubernetes
         run: |
           kubectl apply -f secrets.yaml -n keycloak
@@ -115,5 +119,3 @@ jobs:
           kubectl apply -f keycloak-deployment.yaml -n keycloak
           kubectl apply -f keycloak-service.yaml -n keycloak
           kubectl apply -f keycloak-ingress.yaml -n keycloak
-          
-          kubectl set image deployment/keycloak keycloak=${{env.IMAGE}}:${{env.VERSION}} -n keycloak
