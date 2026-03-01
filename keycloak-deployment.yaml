@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keycloak
+  labels:
+    app: keycloak
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: keycloak
+  template:
+    metadata:
+      labels:
+        app: keycloak
+    spec:
+      containers:
+        - name: keycloak
+          image: ghcr.io/silverminer007/keycloak:latest
+          command: ['/opt/keycloak/bin/kc.sh', 'start-dev']
+          ports:
+            - containerPort: 8080
+              name: http
+            - containerPort: 9000
+              name: metrics
+          env:
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_METRICS_ENABLED
+              value: "true"
+            - name: KC_DB
+              value: "postgres"
+            - name: KC_DB_URL
+              value: "jdbc:postgresql://keycloak-postgres:5432/keycloak"
+            - name: KC_DB_USERNAME
+              value: "keycloak"
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak-secret
+                  key: database_password
+            #- name: KC_HOSTNAME
+            #  value: "keycloak.chronos-live.de"
+            #- name: KC_HOSTNAME_STRICT
+            #  value: "false"
+            - name: KC_ENABLE_HTTP
+              value: "true"
+            - name: KC_PROXY_HEADERS
+              value: "xforwarded"

@@ -1,0 +1,118 @@
+name: Build Keycloak Image and push to k8s
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install Semantic Release
+        run: |
+          npm install -g semantic-release \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            @semantic-release/github
+
+      - name: 🚀 Run Semantic Release (GitHub only)
+        id: semantic
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npx semantic-release --plugins \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            @semantic-release/github
+
+      - name: 🧾 Get latest release version
+        id: get_version
+        run: |
+          REPO_OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          VERSION=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' | sed 's/^v//')
+          IMAGE=ghcr.io/$REPO_OWNER_LC/keycloak
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+          echo "**Image**: $IMAGE:$VERSION" >> $GITHUB_STEP_SUMMARY
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐳 Build & Push Docker Image
+        run: |
+          docker build -t $IMAGE:$VERSION -f Dockerfile .
+          docker push $IMAGE:$VERSION
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 📦 Re-tag Docker Image (latest)
+        run: |
+          echo "Tagging as $IMAGE:latest ..."
+          docker tag $IMAGE:$VERSION $IMAGE:latest
+
+          echo "Pushing $IMAGE:latest ..."
+          docker push $IMAGE:latest
+      
+  deploy:
+    name: 🚀 Deploy to Kubernetes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+
+      - name: 🔐 Configure kubectl
+        run: |
+          echo "${{ secrets.KUBE_CA_CERT }}" | base64 -d > ca.crt
+          kubectl config set-cluster k3s-cluster \
+            --server=${{ secrets.KUBE_SERVER }} \
+            --certificate-authority=ca.crt
+          kubectl config set-credentials github-actions \
+            --token=${{ secrets.KUBE_TOKEN }}
+          kubectl config set-context k3s-context \
+            --cluster=k3s-cluster \
+            --user=github-actions
+          kubectl config use-context k3s-context
+
+      - name: ✅ Test kubectl connection
+        run: |
+          echo "🔍 Testing Kubernetes connection..."
+          kubectl get pods -n keycloak
+
+      - name: 🚀 Deploy to Kubernetes
+        run: |
+          kubectl apply -f secrets.yaml -n keycloak
+          kubectl apply -f cert-manager.yaml -n keycloak
+          kubectl apply -f postgresql.yaml -n keycloak
+          kubectl apply -f keycloak-deployment.yaml -n keycloak
+          kubectl apply -f keycloak-service.yaml -n keycloak
+          kubectl apply -f keycloak-ingress.yaml -n keycloak
