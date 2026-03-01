@@ -1,0 +1,108 @@
+# github-actions-rbac.yaml - Service Account für CI/CD
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: keycloak-github-actions-deployer
+  namespace: keycloak
+  labels:
+    app: github-actions
+    component: deployer
+
+---
+# ClusterRole für Deployment Permissions
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: keycloak-github-actions-deployer
+  labels:
+    app: github-actions
+rules:
+  # Deployment Management
+  - apiGroups: ["apps"]
+    resources: ["deployments", "replicasets"]
+    verbs: ["get", "list", "create", "update", "patch", "delete"]
+
+  # Service Management
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "create", "update", "patch"]
+
+  # ConfigMap und Secret Management
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets"]
+    verbs: ["get", "list", "create", "update", "patch", "delete"]
+
+  # Ingress Management
+  - apiGroups: ["networking.k8s.io"]
+    resources: ["ingresses"]
+    verbs: ["get", "list", "create", "update", "patch"]
+
+  # Pod Logs für Debugging
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list"]
+
+  # ServiceMonitor für Monitoring
+  - apiGroups: ["monitoring.coreos.com"]
+    resources: ["servicemonitors"]
+    verbs: ["get", "list", "create", "update", "patch"]
+
+  # BitwardenSecret Management
+  - apiGroups: ["k8s.bitwarden.com"]
+    resources: ["bitwardensecrets"]
+    verbs: ["get", "list", "create", "update", "patch"]
+
+  - apiGroups: [ "" ]
+    resources: [ "persistentvolumeclaims" ]
+    verbs: [ "get", "list", "create", "update", "patch" ]
+
+  - apiGroups: [ "monitoring.coreos.com" ]
+    resources: [ "prometheusrules" ]
+    verbs: [ "get", "list", "create", "update", "patch" ]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: keycloak-github-actions-deployer
+  namespace: keycloak
+  labels:
+    app: github-actions
+subjects:
+  - kind: ServiceAccount
+    name: keycloak-github-actions-deployer
+    namespace: keycloak
+roleRef:
+  kind: ClusterRole
+  name: keycloak-github-actions-deployer
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Secret für Service Account Token (long-lived)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-github-actions-deployer-token
+  namespace: keycloak
+  annotations:
+    kubernetes.io/service-account.name: keycloak-github-actions-deployer
+  labels:
+    app: github-actions
+type: kubernetes.io/service-account-token
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: keycloak-github-actions-deployer-monitoring
+  namespace: monitoring
+  labels:
+    app: github-actions
+subjects:
+  - kind: ServiceAccount
+    name: keycloak-github-actions-deployer
+    namespace: keycloak
+roleRef:
+  kind: ClusterRole
+  name: keycloak-github-actions-deployer
+  apiGroup: rbac.authorization.k8s.io
