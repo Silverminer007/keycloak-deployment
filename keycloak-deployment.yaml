@@ -19,19 +19,13 @@ spec:
       containers:
         - name: keycloak
           image: ghcr.io/silverminer007/keycloak:latest
-          command: ['/opt/keycloak/bin/kc.sh', 'start']
+          command: ['/opt/keycloak/bin/kc.sh', 'start', '--optimized', '--http-enabled']
           ports:
             - containerPort: 8080
               name: http
             - containerPort: 9000
               name: metrics
           env:
-            - name: KC_HEALTH_ENABLED
-              value: "true"
-            - name: KC_METRICS_ENABLED
-              value: "true"
-            - name: KC_DB
-              value: "postgres"
             - name: KC_DB_URL
               value: "jdbc:postgresql://keycloak-postgres:5432/keycloak"
             - name: KC_DB_USERNAME
