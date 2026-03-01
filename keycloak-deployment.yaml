@@ -14,6 +14,8 @@ spec:
       labels:
         app: keycloak
     spec:
+      imagePullSecrets:
+        - name: chronos-docker-secret
       containers:
         - name: keycloak
           image: ghcr.io/silverminer007/keycloak:latest
