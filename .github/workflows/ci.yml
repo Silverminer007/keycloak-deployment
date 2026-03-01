@@ -45,7 +45,7 @@ jobs:
         id: get_version
         run: |
           REPO_OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          VERSION=$(gh release list --limit 1 --json tagName --jq '.[0].tagName' | sed 's/^v//')
+          VERSION=$(git tag --sort=-creatordate | head -1')
           IMAGE=ghcr.io/$REPO_OWNER_LC/keycloak
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
