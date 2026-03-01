@@ -99,7 +99,7 @@ jobs:
             --token=${{ secrets.KUBE_TOKEN }}
           kubectl config set-context k3s-context \
             --cluster=k3s-cluster \
-            --user=keycloak-github-actions-deployer
+            --user=github-actions
           kubectl config use-context k3s-context
 
       - name: ✅ Test kubectl connection
@@ -113,9 +113,20 @@ jobs:
 
       - name: 🚀 Deploy to Kubernetes
         run: |
+          echo -n "Updating Secrets ..."
           kubectl apply -f secrets.yaml -n keycloak
+          
+          echo -n "Updating Certificates ..."
           kubectl apply -f cert-manager.yaml -n keycloak
+          
+          echo -n "Updating Postgres ..."
           kubectl apply -f postgresql.yaml -n keycloak
+          
+          echo -n "Updating Keycloak Deployment ..."
           kubectl apply -f keycloak-deployment.yaml -n keycloak
+          
+          echo -n "Updating Keycloak Service ..."
           kubectl apply -f keycloak-service.yaml -n keycloak
+          
+          echo -n "Updating Keycloak Ingress ..."
           kubectl apply -f keycloak-ingress.yaml -n keycloak
