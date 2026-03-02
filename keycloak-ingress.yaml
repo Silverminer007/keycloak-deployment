@@ -8,10 +8,10 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - keycloak.chronos-live.de
+        - auth.chronos-live.de
       secretName: keycloak-tls
   rules:
-    - host: keycloak.chronos-live.de
+    - host: auth.chronos-live.de
       http:
         paths:
           - path: /

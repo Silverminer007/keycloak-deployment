@@ -36,7 +36,7 @@ spec:
                   name: keycloak-secret
                   key: database_password
             - name: KC_HOSTNAME
-              value: "https://keycloak.chronos-live.de"
+              value: "https://auth.chronos-live.de"
             - name: KC_HOSTNAME_STRICT
               value: "true"
             - name: KC_HOSTNAME_BACKCHANNEL_DYNAMIC
