@@ -9,4 +9,4 @@ spec:
     name: letsencrypt-prod
     kind: ClusterIssuer
   dnsNames:
-    - keycloak.chronos-live.de
+    - auth.chronos-live.de
