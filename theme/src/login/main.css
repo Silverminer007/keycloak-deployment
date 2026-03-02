@@ -1,0 +1,958 @@
+/* Chronos Keycloak Theme */
+:root {
+    --chronos-bg-primary: #1a1a1a;
+    --chronos-bg-secondary: #2a2a2a;
+    --chronos-bg-card: #2d2d2d;
+    --chronos-gradient-start: #a855f7;
+    --chronos-gradient-end: #ec4899;
+    --chronos-text-primary: #ffffff;
+    --chronos-text-secondary: #a0a0a0;
+    --chronos-success: #22c55e;
+    --chronos-danger: #ef4444;
+    --chronos-border: #3a3a3a;
+}
+
+/* Body und Hintergrund */
+body {
+    background: var(--chronos-bg-primary);
+    color: var(--chronos-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#kc-header {
+    background: var(--chronos-bg-primary);
+    border-bottom: 1px solid var(--chronos-border);
+}
+
+#kc-header-wrapper {
+    padding: 1.5rem 2rem;
+}
+
+/* Login Card */
+.login-pf body {
+    background: var(--chronos-bg-primary);
+}
+
+.login-pf-page {
+    background: var(--chronos-bg-primary);
+}
+
+#kc-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+#kc-container-wrapper {
+    width: 100%;
+    max-width: 450px;
+}
+
+#kc-form {
+    margin: 0;
+}
+
+#kc-info {
+    margin-top: 0.5rem;
+}
+
+.kcFormCardClass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.kcFormHeaderClass {
+    width: 800px;
+}
+
+#kc-content {
+    background: var(--chronos-bg-card);
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    width: 700px;
+}
+
+@media (max-width: 750px) {
+    .kcFormCardClass {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .kcFormHeaderClass {
+        width: 100%;
+    }
+
+    #kc-content {
+        width: 80%;
+    }
+}
+
+/* Header mit Gradient */
+#kc-form-wrapper {
+    position: relative;
+}
+
+#kc-page-title {
+    background: linear-gradient(135deg, var(--chronos-gradient-start) 0%, var(--chronos-gradient-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.875rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+#kc-header-wrapper {
+    background: linear-gradient(135deg, var(--chronos-gradient-start) 0%, var(--chronos-gradient-end) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.575rem;
+    font-weight: 600;
+    text-align: start;
+}
+
+#kc-content-wrapper {
+    margin-top: 0;
+}
+
+/* Form Elemente */
+.pf-c-form-control,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select {
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    color: var(--chronos-text-primary);
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+    cursor: pointer;
+}
+
+select option {
+    background: var(--chronos-bg-card);
+    color: var(--chronos-text-primary);
+}
+
+.pf-c-form-control:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--chronos-gradient-start);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+}
+
+.pf-c-form-control::placeholder,
+input::placeholder {
+    color: var(--chronos-text-secondary);
+}
+
+/* Labels */
+.kcLabelWrapperClass {
+    display: flex;
+    align-items: top;
+    gap: 0.25rem;
+    color: var(--chronos-danger);
+}
+
+label, .kcInputClassCheckbox {
+    color: var(--chronos-text-primary);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+}
+
+.kcInputClassCheckbox label {
+    margin-bottom: 0;
+}
+
+.kcInputErrorMessageClass {
+    color: var(--chronos-text-primary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    margin-left: 0.5rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.875rem;
+    color: var(--chronos-danger)
+}
+
+#input-error,
+#input-error-email,
+#input-error-username,
+#input-error-password,
+#input-error-password-confirm {
+    margin-top: -0.875rem;
+}
+
+.pf-c-form__group {
+    margin-bottom: 2.25rem;
+}
+
+/* Primary Button (Login/Submit) */
+.kcButtonPrimaryClass {
+    background: linear-gradient(135deg, var(--chronos-gradient-start) 0%, var(--chronos-gradient-end) 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+.kcButtonPrimaryClass:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+}
+
+.kcButtonPrimaryClass:active {
+    transform: translateY(0);
+}
+
+/* Secondary Buttons */
+.kcButtonDefaultClass {
+    background: transparent;
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    color: var(--chronos-text-primary);
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+.kcButtonDefaultClass:hover {
+    background: var(--chronos-bg-secondary);
+    border-color: var(--chronos-gradient-start);
+}
+
+/* Password field group — position context for the toggle button */
+.kcInputGroup,
+.pf-c-input-group {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.kcInputGroup input[type="password"],
+.kcInputGroup input[type="text"],
+.pf-c-input-group input[type="password"],
+.pf-c-input-group input[type="text"] {
+    padding-right: 3rem !important;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Show Password Button — overlaid on the right of the input */
+.kcFormPasswordVisibilityButtonClass {
+    position: absolute;
+    right: 0.5rem;
+    top: 50%;
+    transform: translateY(-75%);
+    background: transparent;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 1;
+}
+
+.kcFormPasswordVisibilityButtonClass:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border: none;
+    transform: translateY(-75%);
+    box-shadow: none;
+}
+
+/* Eye icons via SVG background images */
+.kcFormPasswordVisibilityIconShow,
+.kcFormPasswordVisibilityIconHide {
+    display: block;
+    width: 1.25rem;
+    height: 1.25rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Eye icon — password is hidden, click to reveal */
+.kcFormPasswordVisibilityIconShow {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z'/%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3C/svg%3E");
+}
+
+/* Eye-off icon — password is visible, click to conceal */
+.kcFormPasswordVisibilityIconHide {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24'/%3E%3Cline x1='1' y1='1' x2='23' y2='23'/%3E%3C/svg%3E");
+}
+
+/* Locale Dropdown */
+.kcLocaleDropDownClass {
+    position: relative;
+    display: inline-block;
+}
+
+/* Language toggle button */
+#kc-current-locale-link {
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 6px;
+    color: var(--chronos-text-secondary);
+    font-size: 0.8125rem;
+    padding: 0.375rem 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+}
+
+#kc-current-locale-link::after {
+    content: "▾";
+    font-size: 0.75rem;
+}
+
+#kc-current-locale-link:hover {
+    border-color: var(--chronos-gradient-start);
+    color: var(--chronos-text-primary);
+}
+
+/* Dropdown list — hidden by default, shown when JS sets aria-expanded="true" */
+.kcLocaleListClass {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.375rem);
+    background: var(--chronos-bg-card);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    padding: 0.375rem 0;
+    min-width: 10rem;
+    max-height: 16rem;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    list-style: none;
+    margin: 0;
+}
+
+#kc-current-locale-link[aria-expanded="true"] ~ .kcLocaleListClass {
+    display: block;
+}
+
+.kcLocaleListItemClass {
+    margin: 0;
+    padding: 0;
+}
+
+.kcLocaleItemClass {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: var(--chronos-text-primary);
+    font-size: 0.875rem;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+.kcLocaleItemClass:hover {
+    background: rgba(168, 85, 247, 0.08);
+    color: var(--chronos-gradient-start);
+}
+
+/* Links */
+a {
+    color: var(--chronos-gradient-start);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--chronos-gradient-end);
+}
+
+.kcFormSettingClass {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+@media (max-width: 480px) {
+    .kcFormSettingClass {
+        flex-direction: column;
+    }
+
+    .kcFormOptionsWrapperClass {
+        margin-left: 0;
+        align-self: end;
+    }
+}
+
+/* Checkbox */
+input[type="checkbox"] {
+    width: 1.125rem;
+    height: 1.125rem;
+    border-radius: 4px;
+    border: 1px solid var(--chronos-border);
+    background: var(--chronos-bg-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-right: 0.625rem;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--chronos-gradient-start);
+    border-color: var(--chronos-gradient-start);
+}
+
+input:disabled {
+    filter: brightness(70%);
+}
+
+/* Info/Error Messages */
+.alert-error, .alert-warning, .alert-success, .alert-info {
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.pf-c-alert.pf-m-danger,
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid var(--chronos-danger);
+    color: var(--chronos-text-primary);
+}
+
+.pf-c-alert.pf-m-warning,
+.alert-warning {
+    background: rgba(251, 191, 36, 0.1);
+    border: 1px solid #fbbf24;
+    color: var(--chronos-text-primary);
+}
+
+.pf-c-alert.pf-m-success,
+.alert-success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid var(--chronos-success);
+    color: var(--chronos-text-primary);
+}
+
+.pf-c-alert.pf-m-info,
+.alert-info {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid var(--chronos-gradient-start);
+    color: var(--chronos-text-primary);
+}
+
+/* Registration/Info Links */
+#kc-registration {
+    margin-top: 2rem;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--chronos-border);
+}
+
+#kc-registration span {
+    color: var(--chronos-text-secondary);
+    margin-right: 0.5rem;
+}
+
+/* Social Providers */
+#kc-social-providers {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--chronos-border);
+}
+
+/* Hide the auto-generated heading/divider — each button carries its own label */
+#kc-social-providers hr,
+.kc-social-section > hr {
+    display: none;
+}
+
+#kc-social-providers h2,
+.kc-social-section > h2 {
+    display: none;
+}
+
+/* Provider list */
+.kc-social-links,
+.kc-social-grid,
+#kc-social-providers ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+}
+
+/* Grid layout when > 3 providers */
+.kc-social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.625rem;
+}
+
+#kc-social-providers li,
+.pf-l-grid__item {
+    margin: 0;
+}
+
+/* Individual provider button */
+.kcFormSocialAccountGridItem, .kcFormSocialAccountListButtonClass {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    padding: 0.75rem 1.25rem;
+    color: var(--chronos-text-primary);
+    text-decoration: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.kcFormSocialAccountGridItem:hover, .kcFormSocialAccountListButtonClass:hover {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: var(--chronos-gradient-start);
+    color: var(--chronos-text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+}
+
+/* Provider icon */
+.kcCommonLogoIdP {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 1.125rem;
+    line-height: 1.25rem;
+    text-align: center;
+    color: var(--chronos-text-primary);
+}
+
+/* "Sign in with" prefix injected before each provider name */
+.kc-social-icon-text::before {
+    content: "Sign in with ";
+}
+
+.kc-social-icon-text {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--chronos-text-primary);
+}
+
+/* === Provider-specific SVG icons === */
+
+/* Suppress FontAwesome ::before for known providers so SVG shows cleanly */
+#social-google .kcCommonLogoIdP::before,
+#social-github .kcCommonLogoIdP::before,
+#social-microsoft .kcCommonLogoIdP::before,
+#social-windows .kcCommonLogoIdP::before,
+#social-gitlab .kcCommonLogoIdP::before,
+#social-linkedin .kcCommonLogoIdP::before,
+#social-twitter .kcCommonLogoIdP::before,
+#social-x .kcCommonLogoIdP::before,
+#social-facebook .kcCommonLogoIdP::before,
+#social-bitbucket .kcCommonLogoIdP::before {
+    content: none;
+}
+
+/* Google */
+#social-google .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%234285F4' d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'/%3E%3Cpath fill='%2334A853' d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'/%3E%3Cpath fill='%23FBBC05' d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'/%3E%3Cpath fill='%23EA4335' d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'/%3E%3C/svg%3E");
+}
+
+/* GitHub */
+#social-github .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z'/%3E%3C/svg%3E");
+}
+
+/* Microsoft / Windows */
+#social-microsoft .kcCommonLogoIdP,
+#social-windows .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23f25022' d='M1 1h10v10H1z'/%3E%3Cpath fill='%2300a4ef' d='M13 1h10v10H13z'/%3E%3Cpath fill='%237fba00' d='M1 13h10v10H1z'/%3E%3Cpath fill='%23ffb900' d='M13 13h10v10H13z'/%3E%3C/svg%3E");
+}
+
+/* GitLab */
+#social-gitlab .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FC6D26'%3E%3Cpath d='M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.51A.42.42 0 0118.6 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z'/%3E%3C/svg%3E");
+}
+
+/* LinkedIn */
+#social-linkedin .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230A66C2'%3E%3Cpath d='M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z'/%3E%3C/svg%3E");
+}
+
+/* Twitter / X */
+#social-twitter .kcCommonLogoIdP,
+#social-x .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z'/%3E%3C/svg%3E");
+}
+
+/* Facebook */
+#social-facebook .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231877F2'%3E%3Cpath d='M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z'/%3E%3C/svg%3E");
+}
+
+/* Bitbucket */
+#social-bitbucket .kcCommonLogoIdP {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230052CC'%3E%3Cpath d='M.778 1.213a.768.768 0 00-.768.892l3.263 19.81c.084.5.515.868 1.022.873H19.95a.772.772 0 00.77-.646l3.27-20.03a.768.768 0 00-.768-.891L.778 1.213zM14.52 15.53H9.522L8.17 8.466h7.561l-1.211 7.064z'/%3E%3C/svg%3E");
+}
+
+/* Required Asterisk */
+.required {
+    color: var(--chronos-danger);
+    margin-right: 0.25rem;
+}
+
+/* Form Buttons Container */
+#kc-form-buttons {
+    margin-top: 1.5rem;
+}
+
+/* Locale Selector — standalone (outside re-auth header) */
+#kc-locale {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+/* When inside the re-auth header, flow normally */
+.kcFormHeaderClass #kc-locale {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0.75rem;
+}
+
+/* Terms & Conditions */
+#kc-terms-text {
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    padding: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    color: var(--chronos-text-primary);
+}
+
+/* Username/Email Indicator */
+.pf-c-form-control[disabled] {
+    background: var(--chronos-bg-primary);
+    color: var(--chronos-text-secondary);
+    cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #kc-container {
+        padding: 1rem;
+    }
+
+    #kc-content {
+        padding: 1.5rem;
+    }
+
+    #kc-page-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* OTP Code Input */
+.pf-c-form-control.otp-input {
+    text-align: center;
+    font-size: 1.5rem;
+    letter-spacing: 0.5rem;
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.password-strength.weak {
+    background: var(--chronos-danger);
+    width: 33%;
+}
+
+.password-strength.medium {
+    background: #fbbf24;
+    width: 66%;
+}
+
+.password-strength.strong {
+    background: var(--chronos-success);
+    width: 100%;
+}
+
+/* ===== Re-authenticate / Form Header ===== */
+
+.kcFormHeaderClass {
+    margin-bottom: 1.5rem;
+}
+
+/* Username chip — shows who is being authenticated */
+#kc-username {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+}
+
+#kc-attempted-username {
+    color: var(--chronos-text-primary);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    display: block;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* Restart login link */
+#reset-login {
+    color: var(--chronos-text-secondary);
+    text-decoration: none;
+    flex-shrink: 0;
+    transition: color 0.2s ease;
+}
+
+#reset-login:hover {
+    color: var(--chronos-gradient-start);
+}
+
+.kc-login-tooltip {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Restart icon via SVG (overrides FontAwesome) */
+.kcResetFlowIcon {
+    display: block;
+    width: 1.125rem;
+    height: 1.125rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8'/%3E%3Cpath d='M3 3v5h5'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 0;
+}
+
+.kcResetFlowIcon::before {
+    content: none;
+}
+
+/* Tooltip popup on hover */
+.kc-tooltip-text {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.5rem);
+    background: var(--chronos-bg-card);
+    border: 1px solid var(--chronos-border);
+    border-radius: 6px;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--chronos-text-primary);
+    white-space: nowrap;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.kc-login-tooltip:hover .kc-tooltip-text {
+    display: block;
+}
+
+/* ===== WebAuthn / Passkey selection list ===== */
+
+.kcFormOptionsClass, .kcSelectAuthListClass {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Individual passkey card */
+.kcSelectAuthListItemClass {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--chronos-bg-secondary);
+    border: 1px solid var(--chronos-border);
+    border-radius: 8px;
+    padding: 0.875rem 1.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: var(--chronos-text-primary);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.kcSelectAuthListItemClass:hover {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: var(--chronos-gradient-start);
+    color: var(--chronos-text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(168, 85, 247, 0.15);
+}
+
+/* Icon container */
+.kcSelectAuthListItemIconClass {
+    flex-shrink: 0;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: rgba(168, 85, 247, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Security key icon via SVG (overrides FontAwesome) */
+.kcWebAuthnDefaultIcon,
+.kcSelectAuthListItemIconPropertyClass {
+    display: block;
+    width: 1.375rem;
+    height: 1.375rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 0;
+}
+
+.kcWebAuthnDefaultIcon::before,
+.kcSelectAuthListItemIconPropertyClass::before {
+    content: none;
+}
+
+/* Text content */
+.kcSelectAuthListItemArrowIconClass {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+/* Key name */
+.kcSelectAuthListItemHeadingClass {
+    color: var(--chronos-text-primary);
+    font-weight: 600;
+    font-size: 0.9375rem;
+}
+
+/* Transport type + created date */
+.kcSelectAuthListItemDescriptionClass {
+    color: var(--chronos-text-secondary);
+    font-size: 0.8125rem;
+    display: flex;
+    gap: 0.3rem;
+}
+
+/* Flex spacer */
+.kcSelectAuthListItemFillClass {
+    display: none;
+}
+
+/* Chevron arrow on the right */
+.kcSelectAuthListItemClass::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233a3a3a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+    transition: stroke 0.2s ease;
+}
+
+.kcSelectAuthListItemClass:hover::after {
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'/%3E%3C/svg%3E");
+}
+
+/* ===== Register page — "* Required fields" below heading ===== */
+
+.kcContentWrapperClass {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Heading first */
+.kcContentWrapperClass .col-md-10 {
+    order: 1;
+}
+
+/* "* Required fields" below the heading */
+.kcContentWrapperClass .kcLabelWrapperClass.subtitle {
+    order: 2;
+    margin-top: -1.25rem;
+    font-size: 0.8125rem;
+    color: var(--chronos-text-secondary);
+    font-weight: 400;
+}
+
+.kcContentWrapperClass .kcLabelWrapperClass.subtitle .required {
+    color: var(--chronos-danger);
+    font-weight: 700;
+}

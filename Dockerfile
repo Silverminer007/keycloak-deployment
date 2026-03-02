@@ -9,6 +9,7 @@ ENV KC_DB=postgres
 
 # Apple Social Identity Provider - https://github.com/klausbetz/apple-identity-provider-keycloak
 ADD --chown=keycloak:keycloak https://github.com/klausbetz/apple-identity-provider-keycloak/releases/download/1.17.0/apple-identity-provider-1.17.0.jar /opt/keycloak/providers/apple-identity-provider-1.17.0.jar
+ADD --chown=keycloak:keycloak ./theme/dist_keycloak/chronos-theme.jar /opt/keycloak/providers/chronos-theme.jar
 
 # build optimized image
 RUN /opt/keycloak/bin/kc.sh build
