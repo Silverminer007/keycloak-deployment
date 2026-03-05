@@ -141,6 +141,9 @@ jobs:
           echo -n "Updating Keycloak Service ..."
           kubectl apply -f keycloak-service.yaml -n keycloak
           
+          echo -n "Updating Keycloak Service Monitor ..."
+          kubectl apply -f keycloak-service-monitor.yaml -n keycloak
+          
           echo -n "Updating Keycloak Ingress ..."
           kubectl apply -f keycloak-ingress.yaml -n keycloak
           

@@ -4,6 +4,8 @@ metadata:
   name: keycloak
   labels:
     app: keycloak
+    app.kubernetes.io/name: keycloak
+    app.kubernetes.io/instance: keycloak
 spec:
   ports:
     - port: 80
