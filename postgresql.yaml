@@ -18,6 +18,8 @@ metadata:
   namespace: keycloak
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: postgres
@@ -43,7 +45,7 @@ spec:
                   key: database_password
           volumeMounts:
             - name: postgres-storage
-              mountPath: /var/lib/postgresql/18/data
+              mountPath: /var/lib/postgresql/18/docker
               subPath: postgres
           resources:
             requests:
